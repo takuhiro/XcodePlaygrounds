@@ -35,5 +35,34 @@ let emptyDictionary = [String: Float]()
 shoppingList = []
 occupations = [:]
 
+// Control Flow
+
+let individualScores = [75, 43, 103, 87, 12]
+var teamScore = 0
+for score in individualScores {
+    if score > 50 {
+        teamScore += 3
+    }else{
+        teamScore += 1
+    } }
+print(teamScore)
+
+// Optional
+var optionalString: String? = "Hello"
+print(optionalString == nil)
+
+var optionalName: String? = nil
+//var optionalName: String? = "John Appleseed"
+var greeting = "Hello"
+if let name = optionalName {
+    greeting = "Hello, \(name)"
+} else {
+    greeting = "Hello, Mr/Ms"
+}
+print(greeting)
+
+let nickName: String? = nil
+let fullName: String = "John Appleseed"
+let informalGreeting = "Hi \(nickName ?? fullName)"
 
 
