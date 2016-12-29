@@ -229,3 +229,114 @@ let sortedNumbers = numbers.sorted { $0 > $1 }
 print(sortedNumbers)
 
 
+// Objects and Classes
+
+class Shape {
+    
+    var numberOfSides = 0
+    
+    let defaltSuffix = "角形"
+    
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+    
+    func name(suffix: String?) -> String {
+        return "\(numberOfSides)\(suffix ?? defaltSuffix)"
+    }
+}
+
+var shape = Shape()
+shape.numberOfSides = 7
+var shapeDescription = shape.simpleDescription()
+var defaultName = shape.name(suffix: nil)
+var shapeName = shape.name(suffix: "面体")
+
+class NamedShape {
+    
+    var numberOfSides: Int = 0
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+}
+
+var namedShape = NamedShape(name: "四角形")
+namedShape.numberOfSides = 4
+namedShape.simpleDescription()
+
+class Square: NamedShape {
+    var sideLength: Double
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+    
+    override func simpleDescription() -> String {
+        return "A square with side of length \(sideLength)."
+    }
+}
+
+let test = Square(sideLength: 6, name: "my test square")
+test.area()
+test.simpleDescription()
+
+class Circle: NamedShape {
+    var radius: Double
+    
+    init(radius: Double, name: String) {
+        self.radius = radius
+        super.init(name: name)
+    }
+    func area() -> Double {
+        return radius * radius * M_PI
+    }
+    
+    override func simpleDescription() -> String {
+        return "A circle with radius \(radius)"
+    }
+}
+
+var circle = Circle(radius: 2, name: "my circle")
+circle.simpleDescription()
+circle.area()
+
+class EquilateralTriangle: NamedShape {
+    var sideLength: Double = 0.0
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 3
+    }
+    
+    var perimeter: Double {
+        get {
+            return 3.0 * sideLength
+        }
+        set {
+            sideLength = newValue / 3.0
+        }
+    }
+    
+    override func simpleDescription() -> String {
+        return "An equilateral triangle with sides of length \(sideLength)."
+    }
+}
+
+var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
+print(triangle.perimeter)
+triangle.perimeter = 9.9
+print(triangle.sideLength)
+
