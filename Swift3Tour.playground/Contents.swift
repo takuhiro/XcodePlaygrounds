@@ -122,3 +122,110 @@ for i in 0...4 {
 }
 print(total)
 
+
+// Functions and Closures
+
+func greet(person: String, special: String) -> String {
+    return "Hello \(person), today's lunch special is \(special)."
+}
+print(greet(person: "Bob", special: "Grilled chiken"))
+
+func greet2(_ person: String, on day: String) -> String {
+    return "Hello \(person), today is \(day)."
+}
+print(greet2("John", on: "Wednesday"))
+
+func calculateStatistics(scores: [Int]) -> (min: Int, max: Int, sum: Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+    
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        sum += score
+    }
+    return (min, max, sum)
+}
+
+let statistics = calculateStatistics(scores: [5, 3, 100, 3, 9])
+print(statistics.min)
+print(statistics.0)
+
+func sumOf(numbers: Int...) -> Int {
+    var sum = 0
+    for number in numbers {
+        sum += number
+    }
+    return sum
+}
+sumOf()
+sumOf(numbers: 1, 2, 3)
+
+func averageOf(numbers: Int...) -> Int {
+    var sum = 0
+    for number in numbers {
+        sum += number
+    }
+    return sum / numbers.count
+}
+averageOf(numbers: 3, 4, 2, 3)
+
+func returnFifteen() -> Int {
+    var y = 10
+    func add() {
+        y += 5
+    }
+    add()
+    return y
+}
+returnFifteen()
+
+func makeIncrementer() -> ((Int) -> Int) {
+    func addOne(number: Int) -> Int {
+        return 1 + number
+    }
+    return addOne
+}
+var increment = makeIncrementer()
+increment(7)
+
+func hasAnyMatches(list: [Int], condition: (Int) -> Bool) -> Bool {
+    for item in list {
+        if condition(item) {
+            return true
+        }
+    }
+    return false
+}
+
+func lessThanTen(number: Int) -> Bool {
+    return number < 10
+}
+
+var numbers = [20, 19, 11, 12]
+hasAnyMatches(list: numbers, condition: lessThanTen)
+
+
+numbers.map({
+    (number: Int) -> Int in
+    if number % 2 == 0 {
+        print("odd number: \(number)")
+        return 0;
+    }
+    let result = 3 * number
+    //return result
+    print(result)
+    return result
+})
+
+let mappedNumbers = numbers.map({ number in 3 * number })
+print(mappedNumbers)
+
+let sortedNumbers = numbers.sorted { $0 > $1 }
+print(sortedNumbers)
+
+
