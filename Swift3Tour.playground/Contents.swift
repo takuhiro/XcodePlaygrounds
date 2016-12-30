@@ -372,3 +372,102 @@ print(triangleAndSquare.triangle.sideLength)
 var optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
 // optionalSquare = nil
 let sideLength = optionalSquare?.sideLength
+
+
+// Enumerations and Structures
+
+enum Rank: Int {
+    case ace = 1
+    case two, three, four, five, six, seven, eight, nine, ten
+    case jack, queen, king
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .ace:
+            return "ace"
+        case .jack:
+            return "jack"
+        case .queen:
+            return "queen"
+        case .king:
+            return "king"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+let ace = Rank.ace
+let aceRawValue = ace.rawValue
+
+let three = Rank.three
+let threeRawValue = three.rawValue
+
+func getBiggerRank(rank1: Rank, rank2: Rank) -> Rank {
+    if rank1.rawValue < rank2.rawValue {
+        return rank2
+    } else if rank1.rawValue == rank2.rawValue {
+        return rank1
+    } else {
+        return rank1
+    }
+}
+
+getBiggerRank(rank1: ace, rank2: three)
+
+if let convertedRank = Rank(rawValue: 3) {
+    let threeDescription = convertedRank.simpleDescription()
+}
+
+enum Suit {
+    case spades, hearts, diamonds, clubs
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .clubs:
+            return "clubs"
+        }
+    }
+    
+    func color() -> String {
+        switch self {
+        case .spades, .clubs:
+            return "black"
+        case .hearts, .diamonds:
+            return "red"
+        }
+    }
+}
+let hearts = Suit.hearts
+let heartsDescription = hearts.simpleDescription()
+let heartColor = hearts.color()
+let spades = Suit.spades
+let spadesDescription = spades.simpleDescription()
+let spadesColor = spades.color()
+
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+    case empty(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let failure = ServerResponse.failure("Out of cheese")
+let empty = ServerResponse.empty("No response")
+
+// switch success {
+// switch failure {
+switch empty {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure... \(message)")
+case let.empty(message):
+    print("No response... \(message)")
+}
+
