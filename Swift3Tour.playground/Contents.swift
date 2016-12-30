@@ -549,3 +549,31 @@ enum SimpleEnumeration: ExampleProtocol {
 var c = SimpleEnumeration.foo
 c.adjust()
 
+// extension
+
+extension Int: ExampleProtocol {
+    mutating func adjust() {
+        self += 42
+    }
+
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+
+}
+print(7.simpleDescription)
+var adusted7 = 7;
+adusted7.adjust()
+print(adusted7.simpleDescription)
+
+extension Double {
+    var absoluteValue: Double {
+        return abs(self)
+    }
+}
+2.2.absoluteValue
+(-1.3).absoluteValue
+
+let protocolValue: ExampleProtocol = a
+print(protocolValue.simpleDescription)
+//print(protocolValue.anotherProperty)
