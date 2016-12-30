@@ -381,6 +381,8 @@ enum Rank: Int {
     case two, three, four, five, six, seven, eight, nine, ten
     case jack, queen, king
     
+    static let all = [ace, two, three, four, five, six, seven, eight, nine, ten, jack, queen, king]
+    
     func simpleDescription() -> String {
         switch self {
         case .ace:
@@ -420,6 +422,8 @@ if let convertedRank = Rank(rawValue: 3) {
 
 enum Suit {
     case spades, hearts, diamonds, clubs
+    
+    static let all = [spades, hearts, diamonds, clubs]
     
     func simpleDescription() -> String {
         switch self {
@@ -471,3 +475,26 @@ case let.empty(message):
     print("No response... \(message)")
 }
 
+// struct
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+    
+    static func createDeck() -> [Card] {
+        var deck: [Card] = []
+        for suit in Suit.all {
+            for rank in Rank.all {
+                deck.append(Card(rank: rank, suit: suit))
+            }
+        }
+        return deck
+    }
+}
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+
+Card.createDeck()
