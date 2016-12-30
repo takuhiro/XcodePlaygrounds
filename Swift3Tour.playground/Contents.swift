@@ -498,3 +498,54 @@ let threeOfSpades = Card(rank: .three, suit: .spades)
 let threeOfSpadesDescription = threeOfSpades.simpleDescription()
 
 Card.createDeck()
+
+
+// Protocols and Extensions
+
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+}
+
+class SimpleClass: ExampleProtocol {
+    var simpleDescription: String = "A very simple class."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += " Now 100% adjusted."
+    }
+}
+
+var a = SimpleClass()
+a.adjust()
+let aDescription = a.simpleDescription
+
+struct SimpleStructure: ExampleProtocol {
+    var simpleDescription: String = "A simple structure"
+    mutating func adjust() {
+        simpleDescription += " (adjusted)"
+    }
+}
+
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription
+
+enum SimpleEnumeration: ExampleProtocol {
+    case foo
+    case bar
+    var simpleDescription: String {
+        switch self {
+        case .foo:
+            return "foo"
+        case .bar:
+            return "bar"
+        }
+    }
+
+    mutating func adjust() {
+        print("\(self.simpleDescription) is adjusted")
+    }
+}
+var c = SimpleEnumeration.foo
+c.adjust()
+
